@@ -34,5 +34,17 @@ RSpec.describe 'String Calculator' do
       expect(add("//#\n1#2#3")).to eq(6)
       expect(add("//$\n4$5$6")).to eq(15)
     end
+
+    it 'raises an exception for a single negative number' do
+      expect { add("1,-2") }.to raise_error("Negative numbers not allowed: -2")
+    end
+
+    it 'raises an exception listing all negative numbers' do
+      expect { add("//;\n1;-2;-3") }.to raise_error("Negative numbers not allowed: -2, -3")
+    end
+
+    it 'does not raise an exception for positive numbers' do
+      expect(add("1,2,3")).to eq(6)
+    end
   end
 end    
